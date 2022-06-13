@@ -15,8 +15,10 @@ export function swapItems<T>(array: T[], from: number, to: number): T[] {
     return array;
   }
 
-  const movingItem = array[from];
-  array[from] = array[to];
-  array[to] = movingItem;
-  return array;
+  const newArray = [...array];
+  const movingItem = newArray[from];
+  newArray.splice(from, 1);
+  newArray.splice(to, 0, movingItem);
+
+  return newArray;
 }

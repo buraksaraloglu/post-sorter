@@ -4,7 +4,13 @@ describe('swapItems', () => {
   it('should swap items', () => {
     const array = [1, 2, 3, 4, 5];
     const result = swapItems(array, 0, 4);
-    expect(result).toEqual([5, 2, 3, 4, 1]);
+    expect(result).toEqual([2, 3, 4, 5, 1]);
+  });
+
+  it('should swap items', () => {
+    const array = [1, 2, 3, 4, 5];
+    const result = swapItems(array, 0, 3);
+    expect(result).toEqual([2, 3, 4, 1, 5]);
   });
 
   it('should throw error if invalid index', () => {
