@@ -15,13 +15,7 @@ interface PostProps {
 }
 
 const MoveButton = ({ onClick, name, children }: { onClick: () => void; name: string; children: React.ReactNode }) => (
-  <button
-    onClick={onClick}
-    role="button"
-    type="button"
-    name={name}
-    className="px-2 hover:bg-white rounded-md transition-colors duration-100"
-  >
+  <button onClick={onClick} role="button" type="button" name={name} className="px-2 hover:bg-white rounded-md">
     {children}
   </button>
 );
