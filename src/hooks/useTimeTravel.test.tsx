@@ -7,10 +7,10 @@ describe('useTimeTravel', () => {
     const { result } = renderHook(() => useTimeTravel());
 
     act(() => {
-      result.current.add({ id: 1, action: { from: 0, move: 1 } });
+      result.current.add({ id: 1, origin: 0, from: 0, move: 1 });
     });
 
-    expect(result.current.history).toEqual([{ id: 1, action: { from: 0, move: 1 } }]);
+    expect(result.current.history).toEqual([{ id: 1, origin: 0, from: 0, move: 1 }]);
   });
 
   it('should throw error if step is out of range', () => {
@@ -33,21 +33,21 @@ describe('useTimeTravel', () => {
     const { result } = renderHook(() => useTimeTravel());
 
     act(() => {
-      result.current.add({ id: 5, action: { from: 4, move: -1 } });
-      result.current.add({ id: 5, action: { from: 3, move: -1 } });
-      result.current.add({ id: 5, action: { from: 2, move: -1 } });
+      result.current.add({ id: 5, origin: 4, from: 4, move: -1 });
+      result.current.add({ id: 5, origin: 4, from: 3, move: -1 });
+      result.current.add({ id: 5, origin: 4, from: 2, move: -1 });
     });
 
     act(() => {
       result.current.rollback(1);
     });
 
-    expect(result.current.history[0]).toEqual({ id: 5, action: { from: 3, move: -1 } });
+    expect(result.current.history[0]).toEqual({ id: 5, origin: 4, from: 3, move: -1 });
 
     act(() => {
       result.current.rollback(1);
     });
 
-    expect(result.current.history[0]).toEqual({ id: 5, action: { from: 4, move: -1 } });
+    expect(result.current.history[0]).toEqual({ id: 5, origin: 4, from: 4, move: -1 });
   });
 });

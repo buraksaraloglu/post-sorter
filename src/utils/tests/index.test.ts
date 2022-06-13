@@ -22,8 +22,6 @@ describe('swapItems', () => {
   });
 
   it('should throw error if invalid array', () => {
-    expect(() => swapItems(undefined, 0, 0)).toThrowError('Invalid array');
-    expect(() => swapItems(null, 0, 0)).toThrowError('Invalid array');
     expect(() => swapItems([], 0, 0)).toThrowError('Invalid array');
   });
 });
