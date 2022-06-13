@@ -1,8 +1,11 @@
+import { ErrorBoundary } from 'react-error-boundary';
+
+import { ErrorMessage } from 'components/ErrorMessage';
 import { Section } from 'components/Section';
 import { Post } from 'components/Post';
 import { usePostsContext } from 'containers/Contexts/Posts';
 
-const Posts = () => {
+const PostsContainer = () => {
   const { posts, loading, reorderPosts } = usePostsContext();
 
   const renderPosts = () =>
@@ -24,11 +27,19 @@ const Posts = () => {
     );
 
   return (
+    <ErrorBoundary FallbackComponent={ErrorMessage}>{loading ? <div>Loading...</div> : renderPosts()}</ErrorBoundary>
+  );
+};
+
+const PostsSection = () => {
+  return (
     <Section>
       <h1 className="mb-4 font-bold">Sortable Posts List</h1>
-      {loading ? <div>Loading...</div> : renderPosts()}
+      <ErrorBoundary FallbackComponent={ErrorMessage}>
+        <PostsContainer />
+      </ErrorBoundary>
     </Section>
   );
 };
 
-export default Posts;
+export default PostsSection;

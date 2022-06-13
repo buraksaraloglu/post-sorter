@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import 'tailwindcss/tailwind.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { App } from 'containers';
 

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState, useRef } from 'react';
+import { toast } from 'react-toastify';
 
 import { getPosts } from 'api/posts';
 import { reduceHistoryMoves } from 'utils/reduceHistoryMoves';
@@ -26,6 +27,16 @@ export const usePosts = (start = 0, limit = 5) => {
       setPosts(postsData);
       initialPosts.current = postsData;
     } catch (error: any) {
+      toast.error(error.message, {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined
+      });
+
       setError(error);
     }
     setLoading(false);

@@ -10,7 +10,6 @@ import type { IHistoryItem } from 'hooks/useTimeTravel';
 export interface IPostsContext {
   posts: IPost[];
   loading: boolean;
-  error: Error | null;
   reorderPosts: (from: number, to: number) => void;
   history: IHistoryItem[];
   rollback: (to: number) => void;
@@ -19,7 +18,6 @@ export interface IPostsContext {
 const PostsContext = createContext<IPostsContext>({
   posts: [],
   loading: true,
-  error: null,
   reorderPosts: () => {},
   history: [],
   rollback: () => {}
@@ -28,7 +26,7 @@ const PostsContext = createContext<IPostsContext>({
 export const usePostsContext = () => useContext<IPostsContext>(PostsContext);
 
 const PostsProvider = ({ children }: { children: ReactChild | ReactChild[] }) => {
-  const { posts, loading, error, reorderPosts, rollbackWithHistory } = usePosts();
+  const { posts, loading, reorderPosts, rollbackWithHistory } = usePosts();
 
   const { add, history, rollback } = useTimeTravel();
 
@@ -43,7 +41,6 @@ const PostsProvider = ({ children }: { children: ReactChild | ReactChild[] }) =>
       value={{
         posts,
         loading,
-        error,
         reorderPosts: reorderPostsWithHistory,
         history,
         rollback: (to: number) => {
